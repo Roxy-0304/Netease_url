@@ -121,8 +121,11 @@ class MusicDownloader:
         illegal_chars = r'[<>:"/\\|?*]'
         filename = re.sub(illegal_chars, '_', filename)
         
-        # 移除前后空格和点
-        filename = filename.strip(' .')
+        # 移除前后空格
+        filename = filename.strip()
+        
+        # 移除前后点
+        filename = filename.strip('.')
         
         # 限制长度
         if len(filename) > 200:
@@ -240,7 +243,7 @@ class MusicDownloader:
             music_info = self.get_music_info(music_id, quality)
             
             # 生成文件名
-            filename = f"{music_info.artists} - {music_info.name}"
+            filename = f"{music_info.name}-{music_info.artists}"
             safe_filename = self._sanitize_filename(filename)
             
             # 确定文件扩展名
@@ -304,7 +307,7 @@ class MusicDownloader:
             music_info = self.get_music_info(music_id, quality)
             
             # 生成文件名
-            filename = f"{music_info.artists} - {music_info.name}"
+            filename = f"{music_info.name}-{music_info.artists}"
             safe_filename = self._sanitize_filename(filename)
             
             # 确定文件扩展名
@@ -539,7 +542,7 @@ class MusicDownloader:
         try:
             music_info = self.get_music_info(music_id, quality)
             
-            filename = f"{music_info.artists} - {music_info.name}"
+            filename = f"{music_info.name}-{music_info.artists}"
             safe_filename = self._sanitize_filename(filename)
             file_ext = self._determine_file_extension(music_info.download_url)
             file_path = self.download_dir / f"{safe_filename}{file_ext}"

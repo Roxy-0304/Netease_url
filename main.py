@@ -537,8 +537,8 @@ def download_music_api():
             'download_url': url_data['url']
         }
         
-        # 生成安全文件名
-        safe_name = f"{music_info['name']} [{quality}]"
+        # 生成安全文件名（格式：歌曲名-歌手）
+        safe_name = f"{music_info['name']}-{music_info['artist_string']}"
         safe_name = ''.join(c for c in safe_name if c not in r'<>:"/\|?*')
         filename = f"{safe_name}.{music_info['file_type']}"
         
